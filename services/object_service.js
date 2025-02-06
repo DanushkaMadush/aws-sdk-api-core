@@ -1,6 +1,8 @@
 import dotenv from 'dotenv';
 dotenv.config();
 import fs from 'fs';
+import path from 'path';
+import os from 'os';
 import { Upload } from '@aws-sdk/lib-storage';
 import { 
   S3Client, 
@@ -57,10 +59,18 @@ const uploadObject = async (filePath, bucketName, key) => {
   }
 };
 
-const downloadObject = async (bucketName, key, downloadPath) => {
+const downloadObject = async (bucketName, key) => {
   try {
     const params = { Bucket: bucketName, Key: key };
     const { Body } = await s3Client.send(new GetObjectCommand(params));
+
+    const homeDir = os.homedir();
+    const downloadPath = path.join(homeDir, 'Downloads', key);
+
+    const directory = path.dirname(downloadPath); 
+    if (!fs.existsSync(directory)) {
+      fs.mkdirSync(directory, { recursive: true });
+    }
 
     const fileStream = fs.createWriteStream(downloadPath);
     Body.pipe(fileStream);
