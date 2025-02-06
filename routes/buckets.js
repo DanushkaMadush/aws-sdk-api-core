@@ -1,7 +1,8 @@
-const express = require('express');
+import express from 'express';
+import { listBuckets, createBucket, deleteBucket } from '../services/bucket_service.js';
+
 const router = express.Router();
 
-const { listBuckets, createBucket, deleteBucket } = require('../services/bucket_service');
 // Route to list all buckets
 router.get('/list', async (req, res) => {
   try {
@@ -40,4 +41,4 @@ router.delete('/delete', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router; 
