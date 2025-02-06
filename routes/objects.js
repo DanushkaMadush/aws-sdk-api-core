@@ -1,8 +1,8 @@
-const express = require('express');
-const { getObjectList, uploadObject, downloadObject, deleteObject } = require('../services/object_service');
+import express from 'express';
+import multer from 'multer';
+import { getObjectList, uploadObject, downloadObject, deleteObject } from '../services/object_service.js';
 
 const router = express.Router();
-const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 
 router.get('/list', async (req, res) => {
@@ -54,4 +54,4 @@ router.delete('/delete', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router; 
