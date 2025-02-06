@@ -5,7 +5,8 @@ import { Upload } from '@aws-sdk/lib-storage';
 import { 
   S3Client, 
   GetObjectCommand, 
-  DeleteObjectCommand, 
+  DeleteObjectCommand,
+  ListObjectsCommand, 
 } from '@aws-sdk/client-s3';
 
 // Initialize S3 Client
