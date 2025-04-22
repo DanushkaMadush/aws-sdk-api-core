@@ -19,7 +19,7 @@ router.get('/list', async (req, res) => {
   }
 });
 
-router.post('/upload', upload.single('file'), async (req, res) => {
+router.post('/', upload.single('file'), async (req, res) => {
   const { bucketName } = req.body;
   if (!bucketName || !req.file) {
     return res.status(400).json({ error: 'Bucket name and file are required' });
@@ -34,7 +34,7 @@ router.post('/upload', upload.single('file'), async (req, res) => {
 });
 
 
-router.get('/download', async (req, res) => {
+router.get('/:id', async (req, res) => {
   const { bucketName, key } = req.query;
   if (!bucketName || !key) return res.status(400).json({ error: 'Bucket name and key are required' });
 
@@ -48,7 +48,7 @@ router.get('/download', async (req, res) => {
 });
 
 
-router.delete('/delete', async (req, res) => {
+router.delete('/', async (req, res) => {
   const { bucketName, key } = req.body;
   if (!bucketName || !key) return res.status(400).json({ error: 'Bucket name and key are required' });
 

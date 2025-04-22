@@ -4,7 +4,7 @@ import { listBuckets, createBucket, deleteBucket } from '../services/bucket_serv
 const router = express.Router();
 
 // Route to list all buckets
-router.get('/list', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const buckets = await listBuckets();
     res.json({ buckets });
@@ -14,7 +14,7 @@ router.get('/list', async (req, res) => {
 });
 
 // Route to create a bucket
-router.post('/create', async (req, res) => {
+router.post('/', async (req, res) => {
   const { bucketName } = req.body;
   if (!bucketName) {
     return res.status(400).json({ error: 'Bucket name is required' });
@@ -28,7 +28,7 @@ router.post('/create', async (req, res) => {
 });
 
 // Route to delete a bucket
-router.delete('/delete', async (req, res) => {
+router.delete('/', async (req, res) => {
   const { bucketName } = req.body;
   if (!bucketName) {
     return res.status(400).json({ error: 'Bucket name is required' });
